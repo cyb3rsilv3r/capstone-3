@@ -47,10 +47,16 @@ public class CategoriesController
 
     // add the appropriate annotation for a get action
     @GetMapping("{id}")
-    public Category getById(@PathVariable int id)
+    public ResponseEntity<Category>  getById(@PathVariable int id) //BUG FOUND!! Change return type
     {
-        // get the category by id
-        return categoryService.getById(id);
+      //store category in a variable
+        Category category = categoryService.getById(id);
+        //use if statement to check if cat is missing and if not return 200
+        if (category == null){
+            return ResponseEntity.notFound().build();
+        }
+return ResponseEntity.ok(category);
+
     }
 
     // the url to return all products in category 1 would look like this
@@ -60,12 +66,13 @@ public class CategoriesController
     public List<Product> getProductsById(@PathVariable int categoryId)
     {
         // get a list of product by categoryId
-
         return  productService.listByCategoryId(categoryId);
+
     }
 
     // add annotation to call this method for a POST action
     // add annotation to ensure that only an ADMIN can call this function
+    
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<Category> addCategory(@RequestBody Category category)
@@ -77,7 +84,8 @@ public class CategoriesController
 
     // add annotation to call this method for a PUT (update) action - the url path must include the categoryId
     // add annotation to ensure that only an ADMIN can call this function
-    @PutMapping
+
+    @PutMapping ("{id}")  // BUG FOUND!! ID needs to be added
     @PreAuthorize("hasRole('ADMIN')")
     public Category updateCategory(@PathVariable int id, @RequestBody Category category)
     {
@@ -89,7 +97,8 @@ public class CategoriesController
 
     // add annotation to call this method for a DELETE action - the url path must include the categoryId
     // add annotation to ensure that only an ADMIN can call this function
-    @DeleteMapping
+
+    @DeleteMapping("{id}")  // BUG FOUND!! ID needs to be added
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteCategory(@PathVariable int id)
     {

@@ -26,7 +26,7 @@ public class CategoryService
     public Category getById(int categoryId)
     {
         // get category by id
-        return categoryRepository.findById(categoryId).orElse(null);
+        return categoryRepository.findById(categoryId).orElse(null); //BUG FOUND:
     }
 
     public Category create(Category category)
