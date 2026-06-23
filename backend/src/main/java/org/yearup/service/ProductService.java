@@ -27,8 +27,8 @@ public class ProductService
         }
 
         return products.stream()
-                       .filter(p -> minPrice == null || p.getPrice() <= minPrice)
-                       .filter(p -> maxPrice == null || p.getPrice() >= maxPrice)
+                       .filter(p -> minPrice == null || p.getPrice() >= minPrice) //BUG FOUND!! WRONG < SIGNS
+                       .filter(p -> maxPrice == null || p.getPrice() <= maxPrice)
                        .filter(p -> subCategory == null || subCategory.equalsIgnoreCase(p.getSubCategory()))
       //BUG FOUND!!    //             .filter(Product::isFeatured)
                        .toList();
@@ -61,6 +61,7 @@ public class ProductService
         existing.setSubCategory(product.getSubCategory());
         existing.setFeatured(product.isFeatured());
         existing.setImageUrl(product.getImageUrl());
+        existing.setStock(product.getStock()); // BUG FOUND: UPDATE WASNT SAVING STOCK
         return productRepository.save(existing);
     }
 
