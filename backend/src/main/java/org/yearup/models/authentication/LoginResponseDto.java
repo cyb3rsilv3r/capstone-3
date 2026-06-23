@@ -20,9 +20,9 @@ public class LoginResponseDto {
     }
 
     @JsonProperty("token")
-    String getToken() {
+    public String getToken() {
         return token;
-    }
+    } // bug found!! method not public
 
     void setToken(String token) {
         this.token = token;

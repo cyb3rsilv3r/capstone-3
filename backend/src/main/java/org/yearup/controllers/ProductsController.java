@@ -24,12 +24,14 @@ public class ProductsController
 
     @GetMapping("")
     @PreAuthorize("permitAll()")
-    public List<Product> search(@RequestParam(name="cat", required = false) Integer categoryId,
+   public List<Product> search(@RequestParam(name="cat", required = false) Integer categoryId, //possible bug??
                                 @RequestParam(name="minPrice", required = false) Double minPrice,
                                 @RequestParam(name="maxPrice", required = false) Double maxPrice,
                                 @RequestParam(name="subCategory", required = false) String subCategory)
-    {
-        return productService.search(categoryId, minPrice, maxPrice, subCategory);
+    {  //System.out.println("minPrice ="+ minPrice); <-- checking if min price works
+        return productService.search(categoryId,minPrice,maxPrice,subCategory);
+
+        //BUG SUSPECTED :search(categoryId, minPrice, maxPrice, subCategory);
     }
 
     @GetMapping("{id}")

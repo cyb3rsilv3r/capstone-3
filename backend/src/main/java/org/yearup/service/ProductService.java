@@ -21,13 +21,18 @@ public class ProductService
         List<Product> products = categoryId != null
                 ? productRepository.findByCategoryId(categoryId)
                 : productRepository.findAll();
+        for (Product p : products)
+        {
+            System.out.println(p.getProductId() + " | " + p.getName() + " | " + p.getCategoryId() + " | " + p.getPrice());
+        }
 
         return products.stream()
-                       .filter(p -> minPrice == null || p.getPrice() >= minPrice)
-                       .filter(p -> maxPrice == null || p.getPrice() <= maxPrice)
+                       .filter(p -> minPrice == null || p.getPrice() <= minPrice)
+                       .filter(p -> maxPrice == null || p.getPrice() >= maxPrice)
                        .filter(p -> subCategory == null || subCategory.equalsIgnoreCase(p.getSubCategory()))
-                       .filter(Product::isFeatured)
+      //BUG FOUND!!    //             .filter(Product::isFeatured)
                        .toList();
+        //TODO make the
     }
 
     public List<Product> listByCategoryId(int categoryId)

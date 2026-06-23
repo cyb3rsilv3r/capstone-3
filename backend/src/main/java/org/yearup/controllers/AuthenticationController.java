@@ -65,7 +65,7 @@ public class AuthenticationController {
         }
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
+  //  @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<User> register(@Valid @RequestBody RegisterUserDto newUser) {
 
@@ -85,6 +85,7 @@ public class AuthenticationController {
         profileService.create(profile);
 
         return new ResponseEntity<>(user, HttpStatus.CREATED);
+
     }
 
 }

@@ -140,7 +140,7 @@ public class User {
               '}';
    }
 
-   @JsonIgnore
+ //  @JsonIgnore // BUG FOUND!! 
    public String getRole()
    {
       if(authorities.size() > 0)
