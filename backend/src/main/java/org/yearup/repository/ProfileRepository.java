@@ -7,4 +7,10 @@ import org.yearup.models.Profile;
 @Repository
 public interface ProfileRepository extends JpaRepository<Profile, Integer>
 {
+    //add methods to access all profile features
+        Profile findByUserId(int userId);
+
+
+
 }
+

@@ -18,4 +18,16 @@ public class ProfileService
     {
         return profileRepository.save(profile);
     }
+
+    //Add method service path for searching and updating
+
+    public Profile getByUserId(int userId)
+    {
+        return profileRepository.findByUserId(userId);
+    }
+
+    public Profile update(Profile profile)
+    {
+        return profileRepository.save(profile);
+    }
 }
