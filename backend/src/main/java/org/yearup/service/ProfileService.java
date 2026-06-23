@@ -19,7 +19,7 @@ public class ProfileService
         return profileRepository.save(profile);
     }
 
-    //Add method service path for searching and updating
+    //Add method service path for searching and updating for controller to call
 
     public Profile getByUserId(int userId)
     {
