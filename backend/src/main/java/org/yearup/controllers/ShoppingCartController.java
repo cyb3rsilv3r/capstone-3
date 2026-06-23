@@ -73,14 +73,17 @@ public class ShoppingCartController {
     // the BODY should be a ShoppingCartItem - quantity is the only value that will be updated; return the cart (200 OK)
 
     @PutMapping("/products/{productId}")
-    public ResponseEntity<ShoppingCart>  updateProduct(@PathVariable int productId,
-                                 @RequestBody ShoppingCartItem cartItem,
-                                 Principal principal) {
-       String userName = principal.getName();
-       User user = userService.getByUserName(userName);
-       int userId = user.getId();
-     ShoppingCart cart =   shoppingCartService.updateQuantity( userId, productId, cartItem.getQuantity());
-        return ResponseEntity.status(HttpStatus.CREATED).body(cart);
+    public ResponseEntity<ShoppingCart> updateProduct
+            (@PathVariable int productId,
+             @RequestBody ShoppingCartItem cartItem,
+             Principal principal) {
+        String userName = principal.getName();
+        User user = userService.getByUserName(userName);
+        int userId = user.getId();
+
+        ShoppingCart cart = shoppingCartService.updateQuantity(userId, productId, cartItem.getQuantity());
+
+        return ResponseEntity.ok(cart);
     }
 
     // add a DELETE method to clear all products from the current users cart
